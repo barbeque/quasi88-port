@@ -492,6 +492,8 @@ void	graph_update(int nr_rect, T_GRAPH_RECT rect[])
 
 	SDL_UpdateRects(sdl_display, nr_rect, srect);
     }
+
+//    printf("hello from graph_update\n");
 }
 
 
