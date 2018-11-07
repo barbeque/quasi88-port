@@ -21,7 +21,7 @@ void event_init() {
 }
 
 int keydown_to_key88(SDL_Keysym keysym) {
-  // TODO: use a map for this
+  // TODO: use a map for this (or a macro)
   if(keysym.sym >= SDLK_0 && keysym.sym <= SDLK_9) {
     return KEY88_0 + (keysym.sym - SDLK_0); // hack
   }
@@ -36,6 +36,9 @@ int keydown_to_key88(SDL_Keysym keysym) {
   }
   if(keysym.sym == SDLK_BACKSPACE) {
     return KEY88_DEL;
+  }
+  if(keysym.sym == SDLK_LSHIFT || keysym.sym == SDLK_RSHIFT) {
+    return KEY88_SHIFT;
   }
 
   printf("Unknown key %s\n", SDL_GetKeyName(keysym.sym));
