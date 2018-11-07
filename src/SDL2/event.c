@@ -1,6 +1,7 @@
 #include <SDL.h>
 
 #include "quasi88.h"
+#include "keyboard.h" // KEY88_xxx syms
 
 // globals...
 int use_cmdkey = FALSE;
@@ -19,13 +20,43 @@ void event_init() {
 
 }
 
+int keydown_to_key88(SDL_Keysym keysym) {
+  // TODO: use a map for this
+  if(keysym.sym >= SDLK_0 && keysym.sym <= SDLK_9) {
+    return KEY88_0 + (keysym.sym - SDLK_0); // hack
+  }
+  if(keysym.sym == SDLK_b) { return KEY88_B; }
+  if(keysym.sym == SDLK_e) { return KEY88_E; }
+  if(keysym.sym == SDLK_p) { return KEY88_P; } // UGH
+  if(keysym.sym == SDLK_RETURN) {
+    return KEY88_RETURNL;
+  }
+  if(keysym.sym == SDLK_SPACE) {
+    return KEY88_SPACE;
+  }
+  if(keysym.sym == SDLK_BACKSPACE) {
+    return KEY88_DEL;
+  }
+
+  printf("Unknown key %s\n", SDL_GetKeyName(keysym.sym));
+  return KEY88_Z;
+}
+
 void event_update() {
   SDL_Event event;
   SDL_PollEvent(&event);
 
+  int key88 = 0;
+
   switch(event.type) {
     case SDL_QUIT:
       exit(0); // FIXME make this actually work
+      break;
+    case SDL_KEYDOWN:
+    case SDL_KEYUP:
+      key88 = keydown_to_key88(event.key.keysym);
+      quasi88_key(key88, (event.type == SDL_KEYDOWN));
+      break;
   }
 }
 
