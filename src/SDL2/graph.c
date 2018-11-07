@@ -232,7 +232,7 @@ const T_GRAPH_SPEC	*graph_init(void)
 
 static	int	search_mode(int w, int h, double aspect);
 
-static	SDL_Surface	*sdl_display;
+//static	SDL_Surface	*sdl_display;
 static	SDL_Surface	*sdl_offscreen;
 static  SDL_Texture *sdl_texture;
 static  SDL_Window  *sdl_window;
@@ -529,9 +529,9 @@ void	graph_update(int nr_rect, T_GRAPH_RECT rect[])
 
 	drect = srect[i];
 
-	if (SDL_BlitSurface(sdl_offscreen, &srect[i], sdl_display, &drect) <0) {
+	/*if (SDL_BlitSurface(sdl_offscreen, &srect[i], sdl_display, &drect) <0) {
 	    fprintf(stderr, "SDL: Unsuccessful blitting to %i, %i (%i x %i)\n", srect[i].x, srect[i].y, srect[i].w, srect[i].h);
-	}
+	}*/
     }
 
   // Copy the SDL_Surface into an SDL_Texture
