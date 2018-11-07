@@ -17,7 +17,8 @@
 #	( GTK版は実験中です。GTK版でサウンドを鳴らすには、SDL が必要です )
 
 # X11_VERSION	= 1
-SDL_VERSION	= 1
+#SDL_VERSION	= 1
+SDL2_VERSION	= 1
 # GTK_VERSION	= 1
 
 
@@ -517,6 +518,14 @@ LIBS   +=                       `$(SDL_CONFIG) --libs`
 CFLAGS += -DQUASI88_SDL
 
 else
+ifdef 	SDL2_VERSION
+
+CFLAGS += -Isrc/FUNIX -Isrc/SDL2 -I/Library/Frameworks/SDL2.framework/Headers
+LIBS   +=                       -F/Library/Frameworks -framework SDL2
+
+CFLAGS += -DQUASI88_SDL
+
+else
 ifdef	GTK_VERSION
 
 # GTKバージョンでの設定
@@ -534,6 +543,7 @@ CFLAGS +=  -Isrc/FDUMMY -Isrc/MINI
 
 CFLAGS += -DQUASI88_MINI
 
+endif
 endif
 endif
 endif
@@ -781,6 +791,19 @@ SOUND_OBJS	= $(SOUND_OBJS_BASE)		\
 SOUND_CFLAGS	+= -I$(SRCDIR)/$(SD_SDL_DIR) -DSYSDEP_DSP_SDL
 
 else
+ifdef	SDL2_VERSION
+
+#
+# SDL バージョンでのサウンド設定
+#
+
+SOUND_OBJS	= $(SOUND_OBJS_BASE)		\
+		  $(SD_SDL_DIR)/audio.o		\
+		  $(SD_SDL_DIR)/sdl.o
+
+SOUND_CFLAGS	+= -I$(SRCDIR)/$(SD_SDL_DIR) -DSYSDEP_DSP_SDL
+
+else
 ifdef	GTK_VERSION
 
 #
@@ -814,6 +837,7 @@ SOUND_OBJS	= $(SOUND_OBJS_BASE)	\
 #SOUND_CFLAGS	+=
 SOUND_LIBS	= -lm
 
+endif
 endif
 endif
 endif
@@ -858,6 +882,9 @@ else
 ifdef	SDL_VERSION
 PROGRAM = quasi88.sdl
 else
+ifdef	SDL2_VERSION
+PROGRAM = quasi88.sdl2
+else
 ifdef	GTK_VERSION
 PROGRAM = quasi88.gtk
 else
@@ -874,6 +901,9 @@ else
 ifdef	SDL_VERSION
 OBJECT = SDL/graph.o SDL/wait.o SDL/event.o SDL/main.o FUNIX/file-op.o
 else
+ifdef	SDL2_VERSION
+OBJECT = SDL2/graph.o SDL2/wait.o SDL2/event.o SDL2/main.o FUNIX/file-op.o
+else
 ifdef	GTK_VERSION
 OBJECT = GTK/graph.o GTK/wait.o GTK/event.o GTK/main.o GTK/menubar.o FUNIX/file-op.o
 else
@@ -881,7 +911,7 @@ OBJECT = MINI/graph.o MINI/wait.o MINI/event.o MINI/main.o FDUMMY/file-op.o
 endif
 endif
 endif
-
+endif
 
 
 OBJECT += quasi88.o emu.o memory.o status.o getconf.o \
@@ -912,12 +942,18 @@ ifdef	SDL_VERSION
 OBJDIR		= obj.sdl
 OBJDIRS		+= $(OBJDIR) $(OBJDIR)/SDL $(OBJDIR)/FUNIX
 else
+ifdef	SDL2_VERSION
+OBJDIR		= obj.sdl2
+OBJDIRS		+= $(OBJDIR) $(OBJDIR)/SDL2 $(OBJDIR)/FUNIX
+else
 ifdef	GTK_VERSION
 OBJDIR		= obj.gtk
 OBJDIRS		+= $(OBJDIR) $(OBJDIR)/GTK $(OBJDIR)/FUNIX
 else
 OBJDIR		= obj.mini
 OBJDIRS		+= $(OBJDIR) $(OBJDIR)/MINI $(OBJDIR)/FDUMMY
+endif
+endif
 endif
 endif
 endif
