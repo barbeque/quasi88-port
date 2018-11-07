@@ -198,6 +198,8 @@ static	int	load_rom( char *filelist[], byte *ptr, int size, int disp )
   char buf[ OSD_MAX_FILENAME ];
   const char *dir = osd_dir_rom();
 
+  printf("Trying to load a ROM (%s)...\n", *filelist);
+
   if( dir ){
     for( i=0; filelist[i] ; i++ ){
 
@@ -210,6 +212,9 @@ static	int	load_rom( char *filelist[], byte *ptr, int size, int disp )
 	osd_fclose( fp );
 
 	break;
+      }
+      else {
+	printf("Didn't work (%s).\n", filelist[i]);
       }
 
     }
