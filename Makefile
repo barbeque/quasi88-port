@@ -234,7 +234,7 @@ ARCH = macosx
 # サウンド出力を使用したい場合は、以下のコメントアウトを外して下さい。
 #	動作に必要なリソースが少なめとなります。
 
-# USE_OLD_MAME_SOUND	= 1
+ USE_OLD_MAME_SOUND	= 1
 
 
 
@@ -303,7 +303,7 @@ CC	= gcc
 #	あります。PowerPC 系の gcc などがそうですが、この場合、-fsigned-char 
 #	を指定します。
 
-CFLAGS = -O2
+CFLAGS = -O2 -g
 
 # 例えば gcc & PowerPC の場合、以下のコメントアウトを外します。
 # CFLAGS += -fsigned-char
@@ -356,7 +356,7 @@ CXXLIBS	 = -lstdc++
 #	C++ コンパイラを使う場合、環境によっては $(CXX) とする必要が
 #	あるかもしれません。
 
-LD	= $(CC) -Wl,-s
+LD	= $(CC) -Wl
 # LD	= $(CXX) -Wl,-s
 
 
