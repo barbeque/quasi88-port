@@ -530,7 +530,7 @@ void	graph_update(int nr_rect, T_GRAPH_RECT rect[])
 	drect = srect[i];
 
 	if (SDL_BlitSurface(sdl_offscreen, &srect[i], sdl_display, &drect) <0) {
-	    fprintf(stderr, "SDL: Unsuccessful blitting\n");
+	    //fprintf(stderr, "SDL: Unsuccessful blitting\n");
 	}
     }
 
