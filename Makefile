@@ -356,7 +356,7 @@ CXXLIBS	 = -lstdc++
 #	C++ コンパイラを使う場合、環境によっては $(CXX) とする必要が
 #	あるかもしれません。
 
-LD	= $(CC) -Wl
+LD	= $(CC) -Wl,-s
 # LD	= $(CXX) -Wl,-s
 
 
@@ -451,8 +451,8 @@ endif
 
 ifeq ($(X11_JOYSTICK),joy_sdl)
 
-CFLAGS += -DJOY_SDL -I/Library/Frameworks/SDL.framework/Headers
-LIBS   +=           -F/Library/Frameworks -framework SDL
+CFLAGS += -DJOY_SDL `$(SDL_CONFIG) --cflags`
+LIBS   +=           `$(SDL_CONFIG) --libs`
 
 else
 
@@ -511,8 +511,8 @@ ifdef	SDL_VERSION
 
 # SDLバージョンでの設定
 
-CFLAGS += -Isrc/FUNIX -Isrc/SDL -I/Library/Frameworks/SDL.framework/Headers
-LIBS   +=                       -F/Library/Frameworks -framework SDL
+CFLAGS += -Isrc/FUNIX -Isrc/SDL `$(SDL_CONFIG) --cflags`
+LIBS   +=                       `$(SDL_CONFIG) --libs`
 
 CFLAGS += -DQUASI88_SDL
 
