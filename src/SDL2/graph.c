@@ -393,6 +393,9 @@ printf("@ dont_frameskip  %d\n",    graph_info.dont_frameskip);
                       SDL_TEXTUREACCESS_STREAMING,
                       sdl_width, sdl_height);
 
+    // HACKS
+    sdl_byte_per_pixel = 4;
+
     graph_info.fullscreen	= FALSE;
     graph_info.width		= sdl_offscreen->w;
     graph_info.height		= sdl_offscreen->h;
