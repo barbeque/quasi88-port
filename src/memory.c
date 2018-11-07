@@ -211,6 +211,8 @@ static	int	load_rom( char *filelist[], byte *ptr, int size, int disp )
 	load_size = osd_fread( ptr, sizeof(byte), size, fp );
 	osd_fclose( fp );
 
+	printf("Got it. (%s).\n", buf);
+
 	break;
       }
       else {
