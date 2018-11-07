@@ -216,7 +216,7 @@ const T_GRAPH_SPEC	*graph_init(void)
 
     return &graph_spec;*/
 
-    // FIXME: identify available video modes
+    // FIXME: identify available video modes (SDL_GetDisplayMode)
 
     graph_spec.window_max_width = 640;
     graph_spec.window_max_height = 400;
@@ -234,16 +234,19 @@ static	int	search_mode(int w, int h, double aspect);
 
 static	SDL_Surface	*sdl_display;
 static	SDL_Surface	*sdl_offscreen;
+static  SDL_Texture *sdl_texture;
+static  SDL_Window  *sdl_window;
+static  SDL_Renderer* sdl_renderer;
 
 
 const T_GRAPH_INFO	*graph_setup(int width, int height,
 				     int fullscreen, double aspect)
 {
-    Uint32 flags;
+    /*Uint32 flags;
 
-    /* �������ѹ��䡢�������ɥ������������ؤκݤϡ����� SDL_SetVideoMode() ��
-       �Ƥ֤����������˰�ö�ӥǥ����֥����ƥ�����λ������ɬ�פ������餷��(?)��
-       (�ӥǥ��ɥ饤�а�¸���� x11, windib, directx �ϡ���λ������) */
+    // �������ѹ��䡢�������ɥ������������ؤκݤϡ����� SDL_SetVideoMode() ��
+    // �Ƥ֤����������˰�ö�ӥǥ����֥����ƥ�����λ������ɬ�פ������餷��(?)��
+    // (�ӥǥ��ɥ饤�а�¸���� x11, windib, directx �ϡ���λ������)
 
     if (graph_exist) {
 	if (verbose_proc) printf("Re-Initializing Graphic System (SDL:%s) ...",
@@ -252,7 +255,7 @@ const T_GRAPH_INFO	*graph_setup(int width, int height,
 	if ((graph_info.fullscreen == FALSE && fullscreen == FALSE) &&
 	    (! (sdl_display->flags & SDL_FULLSCREEN))) {
 
-	    /* �������ɥ��Υ������ѹ����ϡ���λ��ɬ�פϤʤ����������ġ� */
+	    // �������ɥ��Υ������ѹ����ϡ���λ��ɬ�פϤʤ����������ġ�
 	    if (verbose_proc) printf("\n");
 
 	} else {
@@ -262,22 +265,22 @@ const T_GRAPH_INFO	*graph_setup(int width, int height,
     }
 
 
-    /* VIDEO����ö��λ�����ʤ顢VIDEO�κƽ����� */
+    // VIDEO����ö��λ�����ʤ顢VIDEO�κƽ�����
     if (! SDL_WasInit(SDL_INIT_VIDEO)) {
 	if (SDL_InitSubSystem(SDL_INIT_VIDEO) != 0) {
 	    if (verbose_proc) printf(" FAILED\n");
 	    return NULL;
 	}
-	/* VIDEO����ö��λ�����ȡ� sdl_mode ��̵���ˤʤ롣(�ǥХ����ˤ��롩) */
+	// VIDEO����ö��λ�����ȡ� sdl_mode ��̵���ˤʤ롣(�ǥХ����ˤ��롩)
 	sdl_mode = SDL_ListModes(NULL, sdl_mode_flags);
 
-		/* sdl_mode �����Ƥ����������Ѥ��äƤ��ޤä����ɤ����褦�� */
+		// sdl_mode �����Ƥ����������Ѥ��äƤ��ޤä����ɤ����褦��
 
 	if (verbose_proc) printf(" OK\n");
     }
 
 
-    /* �����̥⡼�ɤξ��硢Ŭ�ڤʥ⡼�ɤ����� */
+    // �����̥⡼�ɤξ��硢Ŭ�ڤʥ⡼�ɤ�����
     if (fullscreen) {
 	int fit = search_mode(width, height, aspect);
 	if (fit < 0) {
@@ -288,7 +291,7 @@ const T_GRAPH_INFO	*graph_setup(int width, int height,
 	}
     }
 
-    /* �������ɥ��������̡ˤ򳫤� */
+    // �������ɥ��������̡ˤ򳫤�
     if (verbose_proc) {
 	if (fullscreen) printf("  Trying full screen mode ... ");
 	else            printf("  Opening window ... ");
@@ -310,7 +313,7 @@ const T_GRAPH_INFO	*graph_setup(int width, int height,
     if (sdl_display == NULL) return NULL;
 
 
-    /* �����꡼���Хåե������� */
+    // �����꡼���Хåե�������
 
     if (verbose_proc) printf("  Allocating screen buffer ... ");
 
@@ -323,7 +326,7 @@ const T_GRAPH_INFO	*graph_setup(int width, int height,
 
 
 
-    /* ���̾����򥻥åȤ��ơ��֤� */
+    // ���̾����򥻥åȤ��ơ��֤�
 
     graph_info.fullscreen	= fullscreen;
     graph_info.width		= sdl_offscreen->w;
@@ -352,7 +355,7 @@ const T_GRAPH_INFO	*graph_setup(int width, int height,
 	       sdl_display->format->Rmask,
 	       sdl_display->format->Gmask, sdl_display->format->Bmask);
 
-#if 0	/* debug */
+#if 0	// debug
 printf("@ fullscreen      %d\n",    graph_info.fullscreen    );
 printf("@ width           %d\n",    graph_info.width         );
 printf("@ height          %d\n",    graph_info.height        );
@@ -364,6 +367,44 @@ printf("@ write_only      %d\n",    graph_info.write_only    );
 printf("@ broken_mouse    %d\n",    graph_info.broken_mouse  );
 printf("@ dont_frameskip  %d\n",    graph_info.dont_frameskip);
 #endif
+
+    return &graph_info;*/
+
+    int sdl_width = 640;
+    int sdl_height = 400;
+
+    // FIXME HACK just trying to get this damn thing to work
+    sdl_window = SDL_CreateWindow("quasi88",
+                  SDL_WINDOWPOS_UNDEFINED,
+                  SDL_WINDOWPOS_UNDEFINED,
+                  sdl_width, sdl_height, 0);
+
+    sdl_renderer = SDL_CreateRenderer(sdl_window, -1, 0);
+
+    sdl_offscreen = SDL_CreateRGBSurface(0, sdl_width, sdl_height, 32,
+                      0x00ff0000,
+                      0x0000ff00,
+                      0x000000ff,
+                      0xff000000);
+
+    sdl_texture = SDL_CreateTexture(
+                      sdl_renderer,
+                      SDL_PIXELFORMAT_ARGB8888,
+                      SDL_TEXTUREACCESS_STREAMING,
+                      sdl_width, sdl_height);
+
+    graph_info.fullscreen	= FALSE;
+    graph_info.width		= sdl_offscreen->w;
+    graph_info.height		= sdl_offscreen->h;
+    graph_info.byte_per_pixel	= sdl_byte_per_pixel;
+    graph_info.byte_per_line	= sdl_offscreen->pitch;
+    graph_info.buffer		= sdl_offscreen->pixels;
+    graph_info.nr_color		= 255;
+    graph_info.write_only	= FALSE;
+    graph_info.broken_mouse	= FALSE;
+    graph_info.draw_start	= NULL;
+    graph_info.draw_finish	= NULL;
+    graph_info.dont_frameskip	= FALSE;
 
     return &graph_info;
 }
@@ -433,7 +474,7 @@ static	int	search_mode(int w, int h, double aspect)
 
 void	graph_exit(void)
 {
-    SDL_WM_GrabInput(SDL_GRAB_OFF);
+    SDL_SetWindowGrab(sdl_window, FALSE);
 
     SDL_QuitSubSystem(SDL_INIT_VIDEO);
 }
@@ -490,21 +531,22 @@ void	graph_update(int nr_rect, T_GRAPH_RECT rect[])
 	}
     }
 
-    if (sdl_display->flags & SDL_DOUBLEBUF) {
+  // Copy the SDL_Surface into an SDL_Texture
+  SDL_UpdateTexture(sdl_texture, NULL, sdl_offscreen->pixels, sdl_offscreen->pitch);
 
-	SDL_Flip(sdl_display);
+  // Write the texture to screen
+  SDL_RenderClear(sdl_renderer);
+  SDL_RenderCopy(sdl_renderer, sdl_texture, NULL, NULL);
 
-	for (i=0; i<nr_rect; i++) {
+  // Flip
+  SDL_RenderPresent(sdl_renderer);
+
+  // FIXME: no idea what this piece of code was supposed to do
+
+	/*for (i=0; i<nr_rect; i++) {
 	    drect = srect[i];
 	    SDL_BlitSurface(sdl_offscreen, &srect[i], sdl_display, &drect);
-	}
-
-    } else {
-
-	SDL_UpdateRects(sdl_display, nr_rect, srect);
-    }
-
-//    printf("hello from graph_update\n");
+	}*/
 }
 
 
@@ -515,7 +557,7 @@ void	graph_update(int nr_rect, T_GRAPH_RECT rect[])
 
 void	graph_set_window_title(const char *title)
 {
-    SDL_WM_SetCaption(title, title);
+    SDL_SetWindowTitle(sdl_window, title);
 }
 
 /************************************************************************/
@@ -525,12 +567,13 @@ void	graph_set_attribute(int mouse_show, int grab, int keyrepeat_on)
     if (mouse_show) SDL_ShowCursor(SDL_ENABLE);
     else            SDL_ShowCursor(SDL_DISABLE);
 
-    if (grab) SDL_WM_GrabInput(SDL_GRAB_ON);
-    else      SDL_WM_GrabInput(SDL_GRAB_OFF);
+    if (grab) SDL_SetWindowGrab(sdl_window, TRUE);
+    else      SDL_SetWindowGrab(sdl_window, FALSE);
 
-    if (keyrepeat_on) SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,
+    /*if (keyrepeat_on) SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,
 					  SDL_DEFAULT_REPEAT_INTERVAL);
-    else              SDL_EnableKeyRepeat(0, 0);
+    else              SDL_EnableKeyRepeat(0, 0);*/
+    // FIXME ^
 
     sdl_mouse_rel_move = (mouse_show == FALSE && grab) ? TRUE : FALSE;
 
