@@ -68,6 +68,13 @@ int keydown_to_key88(SDL_Keysym keysym) {
   SDL_TO_PC88_KEY(SDLK_LSHIFT, KEY88_SHIFT);
   SDL_TO_PC88_KEY(SDLK_RSHIFT, KEY88_SHIFT);
 
+  // TODO: think about doing a mode here to switch between cursor
+  // and numpad emulation, since almost all games use numpad
+  SDL_TO_PC88_KEY(SDLK_UP, KEY88_UP);
+  SDL_TO_PC88_KEY(SDLK_DOWN, KEY88_DOWN);
+  SDL_TO_PC88_KEY(SDLK_LEFT, KEY88_LEFT);
+  SDL_TO_PC88_KEY(SDLK_RIGHT, KEY88_RIGHT);
+
   printf("Unknown key %s\n", SDL_GetKeyName(keysym.sym));
   return KEY88_Z;
 }
