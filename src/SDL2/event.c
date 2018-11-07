@@ -20,14 +20,13 @@ void event_init() {
 
 }
 
+#define SDL_TO_PC88_KEY(keysdl, key88) if(keysym.sym == keysdl) { return key88; }
+
 int keydown_to_key88(SDL_Keysym keysym) {
   // TODO: use a map for this (or a macro)
   if(keysym.sym >= SDLK_0 && keysym.sym <= SDLK_9) {
     return KEY88_0 + (keysym.sym - SDLK_0); // hack
   }
-  if(keysym.sym == SDLK_b) { return KEY88_B; }
-  if(keysym.sym == SDLK_e) { return KEY88_E; }
-  if(keysym.sym == SDLK_p) { return KEY88_P; } // UGH
   if(keysym.sym == SDLK_RETURN) {
     return KEY88_RETURNL;
   }
@@ -37,9 +36,34 @@ int keydown_to_key88(SDL_Keysym keysym) {
   if(keysym.sym == SDLK_BACKSPACE) {
     return KEY88_DEL;
   }
-  if(keysym.sym == SDLK_LSHIFT || keysym.sym == SDLK_RSHIFT) {
-    return KEY88_SHIFT;
-  }
+
+  SDL_TO_PC88_KEY(SDLK_a, KEY88_A);
+  SDL_TO_PC88_KEY(SDLK_b, KEY88_B);
+  SDL_TO_PC88_KEY(SDLK_c, KEY88_C);
+  SDL_TO_PC88_KEY(SDLK_d, KEY88_D);
+  SDL_TO_PC88_KEY(SDLK_e, KEY88_E);
+  SDL_TO_PC88_KEY(SDLK_f, KEY88_F);
+  SDL_TO_PC88_KEY(SDLK_g, KEY88_G);
+  SDL_TO_PC88_KEY(SDLK_h, KEY88_H);
+  SDL_TO_PC88_KEY(SDLK_i, KEY88_I);
+  SDL_TO_PC88_KEY(SDLK_j, KEY88_J);
+  SDL_TO_PC88_KEY(SDLK_k, KEY88_K);
+  SDL_TO_PC88_KEY(SDLK_l, KEY88_L);
+  SDL_TO_PC88_KEY(SDLK_m, KEY88_M);
+  SDL_TO_PC88_KEY(SDLK_n, KEY88_N);
+  SDL_TO_PC88_KEY(SDLK_o, KEY88_O);
+  SDL_TO_PC88_KEY(SDLK_p, KEY88_P);
+  SDL_TO_PC88_KEY(SDLK_q, KEY88_Q);
+  SDL_TO_PC88_KEY(SDLK_r, KEY88_R);
+  SDL_TO_PC88_KEY(SDLK_s, KEY88_S);
+  SDL_TO_PC88_KEY(SDLK_t, KEY88_T);
+  SDL_TO_PC88_KEY(SDLK_u, KEY88_U);
+  SDL_TO_PC88_KEY(SDLK_v, KEY88_V);
+  SDL_TO_PC88_KEY(SDLK_w, KEY88_W);
+  SDL_TO_PC88_KEY(SDLK_x, KEY88_X);
+  SDL_TO_PC88_KEY(SDLK_y, KEY88_Y);
+  SDL_TO_PC88_KEY(SDLK_z, KEY88_Z);
+  SDL_TO_PC88_KEY(SDLK_RSHIFT, KEY88_SHIFT);
 
   printf("Unknown key %s\n", SDL_GetKeyName(keysym.sym));
   return KEY88_Z;
