@@ -64,6 +64,8 @@ int keydown_to_key88(SDL_Keysym keysym) {
   SDL_TO_PC88_KEY(SDLK_y, KEY88_Y);
   SDL_TO_PC88_KEY(SDLK_z, KEY88_Z);
   SDL_TO_PC88_KEY(SDLK_COMMA, KEY88_COMMA);
+  SDL_TO_PC88_KEY(SDLK_PERIOD, KEY88_PERIOD);
+  SDL_TO_PC88_KEY(SDLK_SLASH, KEY88_SLASH);
   SDL_TO_PC88_KEY(SDLK_SEMICOLON, KEY88_SEMICOLON);
   SDL_TO_PC88_KEY(SDLK_QUOTE, KEY88_COLON);
   // TODO: what about ]?
@@ -71,6 +73,8 @@ int keydown_to_key88(SDL_Keysym keysym) {
   SDL_TO_PC88_KEY(SDLK_LSHIFT, KEY88_SHIFT);
   SDL_TO_PC88_KEY(SDLK_RSHIFT, KEY88_SHIFT);
   SDL_TO_PC88_KEY(SDLK_MINUS, KEY88_MINUS);
+  SDL_TO_PC88_KEY(SDLK_EQUALS, KEY88_CARET);
+  SDL_TO_PC88_KEY(SDLK_BACKSLASH, KEY88_YEN);
 
   // TODO: think about doing a mode here to switch between cursor
   // and numpad emulation, since almost all games use numpad
