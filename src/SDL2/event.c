@@ -70,6 +70,7 @@ int keydown_to_key88(SDL_Keysym keysym) {
   SDL_TO_PC88_KEY(SDLK_ESCAPE, KEY88_STOP);
   SDL_TO_PC88_KEY(SDLK_LSHIFT, KEY88_SHIFT);
   SDL_TO_PC88_KEY(SDLK_RSHIFT, KEY88_SHIFT);
+  SDL_TO_PC88_KEY(SDLK_MINUS, KEY88_MINUS);
 
   // TODO: think about doing a mode here to switch between cursor
   // and numpad emulation, since almost all games use numpad
