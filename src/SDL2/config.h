@@ -30,7 +30,7 @@
 
 /* ���˥塼�Υ����ȥ롿�С�������ɽ���ˤ��ɲä�ɽ���������� (Ǥ�դ�ʸ����) */
 
-#define	Q_COMMENT	"SDL port"
+#define	Q_COMMENT	"SDL2 port"
 
 
 

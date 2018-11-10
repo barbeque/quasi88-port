@@ -1,6 +1,6 @@
 /************************************************************************/
 /*									*/
-/* µÕ¥¢¥»¥ó¥Ö¥é								*/
+/* ï¿½Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¥ï¿½								*/
 /*									*/
 /************************************************************************/
 
@@ -11,22 +11,22 @@
 
 
 /*
-  ¥ª¥Ú¥é¥ó¥É¤Î·¿
-     NOTHING	  ¤Ê¤·	   XX		 ¤½¤Î¤Þ¤ÞÉ½¼¨
-     NUM_8	  8bitÃÍ   XX nn	 nn ¤ò16¿Ê¤ÇÉ½¼¨
-     NUM_16	  16bitÃÍ  XX nn nn	 nn nn ¤ò16¿Ê¤ÇÉ½¼¨
-     ADR_REL	  ÁêÂÐÈÖÃÏ XX nn	 ÀäÂÐÈÖÃÏ¤ò16¿Ê¤ÇÉ½¼¨
+  ï¿½ï¿½ï¿½Ú¥ï¿½ï¿½ï¿½ï¿½É¤Î·ï¿½
+     NOTHING	  ï¿½Ê¤ï¿½	   XX		 ï¿½ï¿½ï¿½Î¤Þ¤ï¿½É½ï¿½ï¿½
+     NUM_8	  8bitï¿½ï¿½   XX nn	 nn ï¿½ï¿½16ï¿½Ê¤ï¿½É½ï¿½ï¿½
+     NUM_16	  16bitï¿½ï¿½  XX nn nn	 nn nn ï¿½ï¿½16ï¿½Ê¤ï¿½É½ï¿½ï¿½
+     ADR_REL	  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ XX nn	 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¤ï¿½16ï¿½Ê¤ï¿½É½ï¿½ï¿½
      PREFIX
-       NOTHING	  ¤Ê¤·	   XX XX	 ¤½¤Î¤Þ¤ÞÉ½¼¨
-       NUM_8	  8bitÃÍ   XX XX nn	 nn ¤ò16¿Ê¤ÇÉ½¼¨
-       NUM_16	  16bitÃÍ  XX XX nn nn	 nn nn ¤ò16¿Ê¤ÇÉ½¼¨
-       INDEX	  »²¾È	   XX XX nn	 nn ¤ò 10¿Ê¤ÇÉ½¼¨
-       IDX_NUM	  »²¾È&ÃÍ  XX XX nn mm	 nn ¤ò 10¿Ê¡¢mm ¤ò16¿Ê¤ÇÉ½¼¨
-       UNEXIST	  Ì¤¼ÂÁõ   XX XX	 XX XX ¤ò16¿Ê¤ÇÉ½¼¨
-       SKIP	  Ì¤¼ÂÁõ   XX		 XX ¤ò16¿Ê¤ÇÉ½¼¨
+       NOTHING	  ï¿½Ê¤ï¿½	   XX XX	 ï¿½ï¿½ï¿½Î¤Þ¤ï¿½É½ï¿½ï¿½
+       NUM_8	  8bitï¿½ï¿½   XX XX nn	 nn ï¿½ï¿½16ï¿½Ê¤ï¿½É½ï¿½ï¿½
+       NUM_16	  16bitï¿½ï¿½  XX XX nn nn	 nn nn ï¿½ï¿½16ï¿½Ê¤ï¿½É½ï¿½ï¿½
+       INDEX	  ï¿½ï¿½ï¿½ï¿½	   XX XX nn	 nn ï¿½ï¿½ 10ï¿½Ê¤ï¿½É½ï¿½ï¿½
+       IDX_NUM	  ï¿½ï¿½ï¿½ï¿½&ï¿½ï¿½  XX XX nn mm	 nn ï¿½ï¿½ 10ï¿½Ê¡ï¿½mm ï¿½ï¿½16ï¿½Ê¤ï¿½É½ï¿½ï¿½
+       UNEXIST	  Ì¤ï¿½ï¿½ï¿½ï¿½   XX XX	 XX XX ï¿½ï¿½16ï¿½Ê¤ï¿½É½ï¿½ï¿½
+       SKIP	  Ì¤ï¿½ï¿½ï¿½ï¿½   XX		 XX ï¿½ï¿½16ï¿½Ê¤ï¿½É½ï¿½ï¿½
        PREFIX
-         INDEX    »²¾È     XX XX nn XX	 nn ¤ò 10¿Ê¤ÇÉ½¼¨
-	 UNEXIST  Ì¤¼ÂÁõ   XX XX XX XX	 XX XX XX XX ¤ò16¿Ê¤ÇÉ½¼¨
+         INDEX    ï¿½ï¿½ï¿½ï¿½     XX XX nn XX	 nn ï¿½ï¿½ 10ï¿½Ê¤ï¿½É½ï¿½ï¿½
+	 UNEXIST  Ì¤ï¿½ï¿½ï¿½ï¿½   XX XX XX XX	 XX XX XX XX ï¿½ï¿½16ï¿½Ê¤ï¿½É½ï¿½ï¿½
 */
 enum{
   OP_NOTHING,		/* XX		-> nothing	*/
@@ -1339,7 +1339,7 @@ static Mnemonics Instruction_FD_CB[256]=
 
 static 	void	printf_head( z80arch *z80, word pc, int num )
 {
-	/* ¥¢¥É¥ì¥¹¡¿¥¤¥ó¥¹¥È¥é¥¯¥·¥ç¥ó¥³¡¼¥É¤ÎÉ½¼¨ */
+	/* ï¿½ï¿½ï¿½É¥ì¥¹ï¿½ï¿½ï¿½ï¿½ï¿½ó¥¹¥È¥é¥¯ï¿½ï¿½ï¿½ï¿½ï¿½ó¥³¡ï¿½ï¿½É¤ï¿½É½ï¿½ï¿½ */
 
   printf("%04X ",pc);
 
@@ -1374,7 +1374,7 @@ int	z80_line_disasm( z80arch *z80, word pc )
   switch( Inst->type ){
   case OP_NOTHING:
     printf_head( z80, pc, 1 );
-    printf( Inst->str );
+    printf( "%s", Inst->str );
     return 1;
 
   case OP_NUM_8:
@@ -1407,7 +1407,7 @@ int	z80_line_disasm( z80arch *z80, word pc )
     switch( Inst->type ){
     case OP_NOTHING:
       printf_head( z80, pc, 2 );
-      printf( Inst->str );
+      printf( "%s", Inst->str );
       return 2;
 
     case OP_UNEXIST:
@@ -1473,7 +1473,7 @@ int	z80_line_disasm( z80arch *z80, word pc )
 
 
 
-#if 0	/* ver 0.5.x ¤Þ¤Ç¤ÎÉ½¼¨·Á¼° */
+#if 0	/* ver 0.5.x ï¿½Þ¤Ç¤ï¿½É½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 void	z80_debug( z80arch *z80, char *mes )
 {
   static char flags[8] = "SZ.H.PNC";
@@ -1486,7 +1486,7 @@ void	z80_debug( z80arch *z80, char *mes )
 
   if(mes) printf("%s",mes);
   printf("    AF :%04X  BC :%04X  DE :%04X  HL :%04X   IX :%04X  IY :%04X\n",
-	 z80->AF.W, z80->BC.W, z80->DE.W, z80->HL.W, z80->IX.W, z80->IY.W ); 
+	 z80->AF.W, z80->BC.W, z80->DE.W, z80->HL.W, z80->IX.W, z80->IY.W );
   printf("    AF':%04X  BC':%04X  DE':%04X  HL':%04X   (%d)\n",
 	 z80->AF1.W, z80->BC1.W, z80->DE1.W, z80->HL1.W, z80->icount );
 
@@ -1500,7 +1500,7 @@ void	z80_debug( z80arch *z80, char *mes )
 
   fflush(stdout);
 }
-#else	/* ver 0.6.0 °Ê¹ß¤ÎÉ½¼¨·Á¼° */
+#else	/* ver 0.6.0 ï¿½Ê¹ß¤ï¿½É½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 void	z80_debug( z80arch *z80, char *mes )
 {
   static const char flags[8] = "SZ.H.PNC";

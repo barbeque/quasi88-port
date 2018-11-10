@@ -76,6 +76,8 @@ int keydown_to_key88(SDL_Keysym keysym) {
   SDL_TO_PC88_KEY(SDLK_EQUALS, KEY88_CARET);
   SDL_TO_PC88_KEY(SDLK_BACKSLASH, KEY88_YEN);
 
+  SDL_TO_PC88_KEY(SDLK_TAB, KEY88_TAB);
+
   SDL_TO_PC88_KEY(SDLK_F1, KEY88_F1);
   SDL_TO_PC88_KEY(SDLK_F2, KEY88_F2);
   SDL_TO_PC88_KEY(SDLK_F3, KEY88_F3);
@@ -86,8 +88,8 @@ int keydown_to_key88(SDL_Keysym keysym) {
   SDL_TO_PC88_KEY(SDLK_F8, KEY88_F8);
   SDL_TO_PC88_KEY(SDLK_F9, KEY88_F9);
   SDL_TO_PC88_KEY(SDLK_F10, KEY88_F10);
-  SDL_TO_PC88_KEY(SDLK_F11, KEY88_F12);
-  SDL_TO_PC88_KEY(SDLK_F12, KEY88_F12);
+  SDL_TO_PC88_KEY(SDLK_F11, KEY88_F12); // status
+  SDL_TO_PC88_KEY(SDLK_F12, KEY88_F12); // menu
 
   // TODO: think about doing a mode here to switch between cursor
   // and numpad emulation, since almost all games use numpad
