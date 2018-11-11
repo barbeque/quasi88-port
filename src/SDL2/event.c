@@ -2,6 +2,7 @@
 
 #include "quasi88.h"
 #include "keyboard.h" // KEY88_xxx syms
+#include "event.h" // quasi88_key
 
 // globals...
 int use_cmdkey = FALSE;
@@ -131,8 +132,9 @@ void event_numlock_off() {
   numlock_setup(FALSE);
 }
 
-void event_numlock_on() {
+int event_numlock_on() {
   numlock_setup(TRUE);
+  return TRUE;
 }
 
 int event_get_joystick_num() {
