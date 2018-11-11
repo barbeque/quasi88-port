@@ -28,15 +28,11 @@ int keydown_to_key88(SDL_Keysym keysym) {
   if(keysym.sym >= SDLK_0 && keysym.sym <= SDLK_9) {
     return KEY88_0 + (keysym.sym - SDLK_0); // hack
   }
-  if(keysym.sym == SDLK_RETURN) {
-    return KEY88_RETURNL;
-  }
-  if(keysym.sym == SDLK_SPACE) {
-    return KEY88_SPACE;
-  }
-  if(keysym.sym == SDLK_BACKSPACE) {
-    return KEY88_DEL;
-  }
+
+  SDL_TO_PC88_KEY(SDLK_RETURN, KEY88_RETURNL);
+  SDL_TO_PC88_KEY(SDLK_BACKPACE, KEY88_DEL);
+  SDL_TO_PC88_KEY(SDLK_SPACE, KEY88_SPACE);
+  SDL_TO_PC88_KEY(SDLK_KP_ENTER, KEY88_RETURNR);
 
   SDL_TO_PC88_KEY(SDLK_a, KEY88_A);
   SDL_TO_PC88_KEY(SDLK_b, KEY88_B);
