@@ -93,6 +93,12 @@ static	void	help_msg_sdl(void)
  ************************************************************************/
 static	void	finish(void);
 
+#ifdef WIN32
+#ifdef main
+#undef main
+#endif // HACK - VS2017 compatibility
+#endif
+
 int	main(int argc, char *argv[])
 {
     int x = 1;
