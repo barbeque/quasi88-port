@@ -139,7 +139,7 @@ USE_SSS_CMD	= 1
 #	( IRIX/AIX 以外では、必ずコメントアウトしておいてください。)
 #
 
-# USE_MONITOR		= 1
+USE_MONITOR		= 1
 
 # MONITOR_READLINE	= 1
 # MONITOR_IGNORE_C_D	= 1
