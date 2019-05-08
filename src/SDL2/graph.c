@@ -218,8 +218,8 @@ const T_GRAPH_SPEC	*graph_init(void)
 
     // FIXME: identify available video modes (SDL_GetDisplayMode)
 
-    graph_spec.window_max_width = 640;
-    graph_spec.window_max_height = 400;
+    graph_spec.window_max_width = 1280;
+    graph_spec.window_max_height = 800;
     graph_spec.fullscreen_max_width = 0;
     graph_spec.fullscreen_max_height = 0;
     graph_spec.forbid_status         = FALSE;
@@ -370,8 +370,23 @@ printf("@ dont_frameskip  %d\n",    graph_info.dont_frameskip);
 
     return &graph_info;*/
 
-    int sdl_width = 640;
-    int sdl_height = 400;
+    // Set the screen size based on rc file -half|-full|-double
+    // Full screen doesn't work (yet)
+    static int sdl_width;
+    static int sdl_height;
+
+    if (screen_size == SCREEN_SIZE_FULL) {
+       sdl_width = 640;
+       sdl_height = 400;
+    }
+    if (screen_size == SCREEN_SIZE_DOUBLE) {
+       sdl_width = 1280;
+       sdl_height = 800;
+    }
+    if (screen_size == SCREEN_SIZE_HALF) {
+       sdl_width = 320;
+       sdl_height = 200;
+    }
 
     // FIXME HACK just trying to get this damn thing to work
     sdl_window = SDL_CreateWindow("quasi88",
