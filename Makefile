@@ -33,7 +33,7 @@ SDL2_VERSION	= 1
 #	ディレクトリが使用されます。
 #	 ~/ は、QUASI88の起動時にホームディレクトリ（$HOME）に展開されます。
 
-ROMDIR	= ~/quasi88/rom/
+ROMDIR	= ~/.quasi88/rom/
 
 
 # DISK用ディレクトリを設定します
@@ -43,7 +43,7 @@ ROMDIR	= ~/quasi88/rom/
 #	ディレクトリが使用されます。
 #	 ~/ は、QUASI88の起動時にホームディレクトリ（$HOME）に展開されます。
 
-DISKDIR	= ~/quasi88/disk/
+DISKDIR	= ~/.quasi88/disk/
 
 
 # TAPE用ディレクトリを設定します
@@ -52,7 +52,7 @@ DISKDIR	= ~/quasi88/disk/
 #	ディレクトリが使用されます。
 #	 ~/ は、QUASI88の起動時にホームディレクトリ（$HOME）に展開されます。
 
-TAPEDIR	= ~/quasi88/tape/
+TAPEDIR	= ~/.quasi88/tape/
 
 
 # (X11)
@@ -272,7 +272,7 @@ USE_FMGEN	= 1
 #	通常のOS の場合、sdl-config   のままで大丈夫なはずです。
 #	FreeBSD  の場合、sdl12-config などにリネームされていることがあります
 
-SDL_CONFIG	= sdl-config
+SDL_CONFIG	= sdl2-config
 
 
 
