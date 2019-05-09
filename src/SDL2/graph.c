@@ -217,9 +217,12 @@ const T_GRAPH_SPEC	*graph_init(void)
     return &graph_spec;*/
 
     // FIXME: identify available video modes (SDL_GetDisplayMode)
+    // The maximum render size (double) is 1280x800, so
+    // 1296 x 816 (per x16) gives a small border for those who want it
+    // Currently this does nothing to limit -height/-width 
 
-    graph_spec.window_max_width = 1280;
-    graph_spec.window_max_height = 800;
+    graph_spec.window_max_width = 1296;
+    graph_spec.window_max_height = 816;
     graph_spec.fullscreen_max_width = 0;
     graph_spec.fullscreen_max_height = 0;
     graph_spec.forbid_status         = FALSE;
@@ -370,22 +373,46 @@ printf("@ dont_frameskip  %d\n",    graph_info.dont_frameskip);
 
     return &graph_info;*/
 
-    // Set the screen size based on rc file -half|-full|-double
-    // Full screen doesn't work (yet)
+    // If the program (sdl) window size is not defined in the rc file
+    // then set the window size based on rc file's -half|-full|-double.
+    // If this is undefined, then the default is -full
+
     static int sdl_width;
     static int sdl_height;
+    static int render_width;
+    static int render_height;
 
     if (screen_size == SCREEN_SIZE_FULL) {
        sdl_width = 640;
        sdl_height = 400;
+       render_width = 640;
+       render_height= 400;
     }
     if (screen_size == SCREEN_SIZE_DOUBLE) {
        sdl_width = 1280;
        sdl_height = 800;
+       render_width = 1280;
+       render_height = 800;
     }
     if (screen_size == SCREEN_SIZE_HALF) {
        sdl_width = 320;
        sdl_height = 200;
+       render_width = 320;
+       render_height = 200;
+    }
+    // try to avoid an rc defined screen size smaller than the render size
+    if ( WIDTH && HEIGHT ) {
+       sdl_width = WIDTH;
+       sdl_height = HEIGHT;
+
+       if ( sdl_width < render_width ) {
+          sdl_width = render_width;
+          sdl_height = render_height;
+       }
+       if ( sdl_height < render_height ) {
+           sdl_height = render_height;
+           sdl_width = render_width;
+       }
     }
 
     // FIXME HACK just trying to get this damn thing to work
