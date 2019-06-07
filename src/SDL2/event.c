@@ -122,6 +122,7 @@ void event_update() {
   SDL_PollEvent(&event);
 
   int key88 = 0;
+  int x, y;
 
   switch(event.type) {
     case SDL_QUIT:
@@ -131,6 +132,37 @@ void event_update() {
     case SDL_KEYUP:
       key88 = keydown_to_key88(event.key.keysym);
       quasi88_key(key88, (event.type == SDL_KEYDOWN));
+      break;
+    case SDL_MOUSEMOTION:    /*------------------------------------------*/
+      x = event.motion.x;
+      y = event.motion.y;
+
+      quasi88_mouse_moved_abs(x, y);
+      break;
+
+    case SDL_MOUSEBUTTONDOWN:/*------------------------------------------*/
+    case SDL_MOUSEBUTTONUP:
+        /* マウス移動イベントも同時に処理する必要があるなら、
+           quasi88_mouse_moved_abs/rel 関数をここで呼び出しておく */
+
+      switch (event.button.button) {
+        case SDL_BUTTON_LEFT:    key88 = KEY88_MOUSE_L;        break;
+        case SDL_BUTTON_MIDDLE:    key88 = KEY88_MOUSE_M;        break;
+        case SDL_BUTTON_RIGHT:    key88 = KEY88_MOUSE_R;        break;
+        default:            key88 = 0;            break;
+      }
+      if (key88) {
+        quasi88_mouse(key88, (event.type == SDL_MOUSEBUTTONDOWN));
+      }
+      break;
+    case SDL_MOUSEWHEEL:
+      if (event.wheel.y < 0)
+        key88 = KEY88_MOUSE_WDN;
+      else
+        key88 = KEY88_MOUSE_WUP;
+      break;
+    case SDL_WINDOWEVENT_EXPOSED:  /*------------------------------------------*/
+      quasi88_expose();
       break;
   }
 }
