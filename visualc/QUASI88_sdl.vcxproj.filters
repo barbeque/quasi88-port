@@ -2,15 +2,15 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{9b01a91a-d010-4ccd-bf1a-bab1329bd242}</UniqueIdentifier>
+      <UniqueIdentifier>{bb3f20af-845d-485b-8426-d7ad1b32b89a}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{aeab9659-ce42-4db1-a6c2-1a5793be81cd}</UniqueIdentifier>
+      <UniqueIdentifier>{55aeb96b-0861-4227-8d12-b04d090f2bc2}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{fa36f359-12e3-4b21-8872-95f18eea9b50}</UniqueIdentifier>
+      <UniqueIdentifier>{f3f12000-a5f2-4338-8bbd-a3cae4f630c6}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
   </ItemGroup>
@@ -200,7 +200,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\..\Downloads\SDL-devel-1.2.15-VC\SDL-1.2.15\lib\x86\SDL.lib" />
-    <Library Include="..\..\..\..\Downloads\SDL-devel-1.2.15-VC\SDL-1.2.15\lib\x86\SDLmain.lib" />
+    <Library Include="lib\Release_Win32\SDL.lib" />
+    <Library Include="lib\Release_Win32\SDLmain.lib" />
   </ItemGroup>
 </Project>

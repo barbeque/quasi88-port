@@ -1,6 +1,6 @@
 /************************************************************************/
 /*									*/
-/* �ե������֥�								*/
+/* 逆アセンブラ								*/
 /*									*/
 /************************************************************************/
 
@@ -11,22 +11,22 @@
 
 
 /*
-  ���ڥ����ɤη�
-     NOTHING	  �ʤ�	   XX		 ���Τޤ�ɽ��
-     NUM_8	  8bit��   XX nn	 nn ��16�ʤ�ɽ��
-     NUM_16	  16bit��  XX nn nn	 nn nn ��16�ʤ�ɽ��
-     ADR_REL	  �������� XX nn	 �������Ϥ�16�ʤ�ɽ��
+  オペランドの型
+     NOTHING	  なし	   XX		 そのまま表示
+     NUM_8	  8bit値   XX nn	 nn を16進で表示
+     NUM_16	  16bit値  XX nn nn	 nn nn を16進で表示
+     ADR_REL	  相対番地 XX nn	 絶対番地を16進で表示
      PREFIX
-       NOTHING	  �ʤ�	   XX XX	 ���Τޤ�ɽ��
-       NUM_8	  8bit��   XX XX nn	 nn ��16�ʤ�ɽ��
-       NUM_16	  16bit��  XX XX nn nn	 nn nn ��16�ʤ�ɽ��
-       INDEX	  ����	   XX XX nn	 nn �� 10�ʤ�ɽ��
-       IDX_NUM	  ����&��  XX XX nn mm	 nn �� 10�ʡ�mm ��16�ʤ�ɽ��
-       UNEXIST	  ̤����   XX XX	 XX XX ��16�ʤ�ɽ��
-       SKIP	  ̤����   XX		 XX ��16�ʤ�ɽ��
+       NOTHING	  なし	   XX XX	 そのまま表示
+       NUM_8	  8bit値   XX XX nn	 nn を16進で表示
+       NUM_16	  16bit値  XX XX nn nn	 nn nn を16進で表示
+       INDEX	  参照	   XX XX nn	 nn を 10進で表示
+       IDX_NUM	  参照&値  XX XX nn mm	 nn を 10進、mm を16進で表示
+       UNEXIST	  未実装   XX XX	 XX XX を16進で表示
+       SKIP	  未実装   XX		 XX を16進で表示
        PREFIX
-         INDEX    ����     XX XX nn XX	 nn �� 10�ʤ�ɽ��
-	 UNEXIST  ̤����   XX XX XX XX	 XX XX XX XX ��16�ʤ�ɽ��
+         INDEX    参照     XX XX nn XX	 nn を 10進で表示
+	 UNEXIST  未実装   XX XX XX XX	 XX XX XX XX を16進で表示
 */
 enum{
   OP_NOTHING,		/* XX		-> nothing	*/
@@ -1339,7 +1339,7 @@ static Mnemonics Instruction_FD_CB[256]=
 
 static 	void	printf_head( z80arch *z80, word pc, int num )
 {
-	/* ���ɥ쥹�����󥹥ȥ饯�����󥳡��ɤ�ɽ�� */
+	/* アドレス／インストラクションコードの表示 */
 
   printf("%04X ",pc);
 
@@ -1374,7 +1374,7 @@ int	z80_line_disasm( z80arch *z80, word pc )
   switch( Inst->type ){
   case OP_NOTHING:
     printf_head( z80, pc, 1 );
-    printf( "%s", Inst->str );
+    printf( Inst->str );
     return 1;
 
   case OP_NUM_8:
@@ -1407,7 +1407,7 @@ int	z80_line_disasm( z80arch *z80, word pc )
     switch( Inst->type ){
     case OP_NOTHING:
       printf_head( z80, pc, 2 );
-      printf( "%s", Inst->str );
+      printf( Inst->str );
       return 2;
 
     case OP_UNEXIST:
@@ -1473,7 +1473,7 @@ int	z80_line_disasm( z80arch *z80, word pc )
 
 
 
-#if 0	/* ver 0.5.x �ޤǤ�ɽ������ */
+#if 0	/* ver 0.5.x までの表示形式 */
 void	z80_debug( z80arch *z80, char *mes )
 {
   static char flags[8] = "SZ.H.PNC";
@@ -1486,7 +1486,7 @@ void	z80_debug( z80arch *z80, char *mes )
 
   if(mes) printf("%s",mes);
   printf("    AF :%04X  BC :%04X  DE :%04X  HL :%04X   IX :%04X  IY :%04X\n",
-	 z80->AF.W, z80->BC.W, z80->DE.W, z80->HL.W, z80->IX.W, z80->IY.W );
+	 z80->AF.W, z80->BC.W, z80->DE.W, z80->HL.W, z80->IX.W, z80->IY.W ); 
   printf("    AF':%04X  BC':%04X  DE':%04X  HL':%04X   (%d)\n",
 	 z80->AF1.W, z80->BC1.W, z80->DE1.W, z80->HL1.W, z80->icount );
 
@@ -1500,7 +1500,7 @@ void	z80_debug( z80arch *z80, char *mes )
 
   fflush(stdout);
 }
-#else	/* ver 0.6.0 �ʹߤ�ɽ������ */
+#else	/* ver 0.6.0 以降の表示形式 */
 void	z80_debug( z80arch *z80, char *mes )
 {
   static const char flags[8] = "SZ.H.PNC";

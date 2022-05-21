@@ -1,109 +1,134 @@
 #----------------------------------------------------------------------
 # quasi88.rc
 #
-#       ¤³¤Î¥Õ¥¡¥¤¥ë¤Ï¡¢UNIXÈÇ QUASI88 ¤Î´Ä¶­ÀßÄê¥Õ¥¡¥¤¥ë¤Ç¤¹¡£
-#	¤³¤Î¥Õ¥¡¥¤¥ë¤Ï¡¢ ~/.quasi88/quasi88.rc ¤Ë¥³¥Ô¡¼¤·¤Æ¤ª»È¤¤²¼¤µ¤¤¡£
+#       This a configuration file for the UNIX version of Quasi88.
+#	This file shold be copied into ~/.quasi88/quasi88.rc.
 
-#	1¹Ô¤Ï 255Ê¸»ú°ÊÆâ¤È¤·¤Æ¤¯¤À¤µ¤¤¡£
-#	# ¤«¤é¹ÔËö¤Þ¤Ç¤Ï¡¢¥³¥á¥ó¥È¤È¤ß¤Ê¤µ¤ì¤Þ¤¹¡£
+#	One line is maximum 255 characters.
+#	# indicates a line comment.
 #----------------------------------------------------------------------
 
 
 #########################################
-#	PC-8801 ¤Îµ¯Æ°¾õÂÖÀßÄê		#
+#	PC-8801 Startup Env.		#
 #########################################
 
-######## BASIC MODE		( -n/-v1s/-v1h/-v2 ¤«¤éÁªÂò¡£Ì¤»ØÄê»þ¤Ï ¼«Æ° )
+######## BASIC MODE		( -n/-v1s/-v1h/-v2. Unset will detect automatically.)
 #-v2
+-v1s
 
-######## CPU ¥¯¥í¥Ã¥¯		( -4mhz/-8mhz ¤«¤éÁªÂò¡£Ì¤»ØÄê»þ¤Ï -4mhz )
-#-4mhz
+# V1 "slow" mode is the default for PC8801 and is what is used for Hachinoid.
+# V2 is used for The Librarian.
 
-######## ¥Ç¥£¥Ã¥×¥¹¥¤¥Ã¥Á	( NEW ONÌ¿Îá¤Î°ú¿ô¤ÈÆ±¤¸¡£Ì¤»ØÄê»þ¤Ï 0x391a )
-#-dipsw		0x391a
+######## CPU Clock		( -4mhz/-8mhz. Default is 4mhz. )
+#-8mhz
+-4mhz
 
-######## ¥µ¥¦¥ó¥É¥Ü¡¼¥É¤ÎÁªÂò	( -sd/-sd2 ¤«¤éÁªÂò¡£Ì¤»ØÄê»þ¤Ï -sd )
+# Only the later PC-88 machines used 8mhz, and not very many games utilized it.
+
+######## Dipswitches	( Settings are the same as a new unit. Undefined is 0x391a )
+-dipsw		0x391a
+
+# examples:
+#12 = 25 row mode
+#1c = n80 basic,40col,20r
+#1e = 40 col,n88,20r
+#1a = n88, 80col,20r
+#18 = terminal
+
+
+######## Soundboard Select	( -sd/-sd2. Default is -sd )
 #-sd2
+-sd
 
-######## ¥¸¥ç¥¤¥¹¥Æ¥£¥Ã¥¯¤ÎÀßÄê	( -nomouse/-mouse/-joymouse/-joystick ¤«¤éÁªÂò)
+# Soundboard II contains OPNA, Soundboard I (standard built-in for many units) is OPN.
+
+######## Joystick Settings	( -nomouse/-mouse/-joymouse/-joystick )
 -nomouse
 
 
 
 #########################################
-#	¥¨¥ß¥å¥ì¡¼¥·¥ç¥ó¤ÎÀßÄê		#
+#	Emulation Settings		#
 #########################################
 
-######## ¥µ¥ÖCPU¤Î¶îÆ°ÀÚ¤êÂØ¤¨¥¿¥¤¥ß¥ó¥°  ( 0¡Á2¤ÎÃÍ¤ò»ØÄê¡¢Ì¤»ØÄê»þ¤Ï¡¢0 )
-#	 -cpu 1 ¤Ë¤¹¤ë¤È¡¢¤Û¤È¤ó¤É¤Î¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤¬Æ°¤¯¤È»×¤ï¤ì¤Þ¤¹¡£
-#-cpu		0
+######## Sub CPU A-Switch Timing  ( Selected from 0-2, default 0 )
+# Set to -cpu 1 should allow most applications to run.
+-cpu 2
 
-######## FDC¤Î¥¦¥§¥¤¥È¤ò¤¢¤ê¤Ë¤¹¤ë	( Ì¤»ØÄê»þ¤Ï¡¢¥¦¥§¥¤¥È¤Ê¤· )
-#	 -fdc_wait ¤ò»ØÄê¤·¤Ê¤¤¤È¡¢Æ°ºî¤·¤Ê¤¤¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤¬¤¢¤ê¤Þ¤¹¡£
-#-fdc_wait
+# CPU 2 is more accurate. 
 
-######## ¼Âµ¡¤È¤ÎÂ®ÅÙÈæ		( 5¡Á5000 [%]¤ÎÃÍ¤ò»ØÄê¡¢Ì¤»ØÄê»þ¤Ï 100 )
+######## FDC Wait Enable	( Default is disabled )
+# Without -fdc_wait some games won't run.
+-fdc_wait
+
+######## Actual unit speed	( 5ï½ž5000 [%], default is 100% )
 #-speed		100
 
+######## Memory Wait
+# Enables the memory sync timing to CPU. Should be on for accuracy.
+-mem_wait
 
 
 #################################
-#	¥°¥é¥Õ¥£¥Ã¥¯¤ÎÀßÄê	#
+#	Graphics Settings	#
 #################################
 
-######## ²èÌÌ¹¹¿·»þ¤Î¥Õ¥ì¡¼¥à¥¹¥­¥Ã¥×¿ô  ( 1°Ê¾å¤ÎÃÍ¤ò»ØÄê¡£Ì¤»ØÄê»þ¤Ï 1 )
+######## Frame display rate  ( Default is 1. )
 #-frameskip	1
 
-######## ¼«Æ°¥Õ¥ì¡¼¥à¥¹¥­¥Ã¥×	( -autoskip/-noautoskip ¤«¤éÁªÂò )
+######## Auto frameskip	( -autoskip/-noautoskip )
 #-autoskip
 
-######## ²èÌÌ¥µ¥¤¥º		( -half/-full ¤«¤éÁªÂò¡£Ì¤»ØÄê»þ¤Ï -full )
--full
+######## Screen size	( -half/-full. Default is -full )
+#-half
 
-######## ¥¦¥¤¥ó¥É¥¦¥µ¥¤¥º	( Ì¤»ØÄê»þ¤Ï¡¢²èÌÌ¥µ¥¤¥º¤ÈÆ±¤¸ )
+######## Window Size	( Default is the same as screen size )
 #-width		680
 #-height	440
 
-######## ¥¤¥ó¥¿¡¼¥ì¡¼¥¹ÀßÄê	( -noskipline/-skipkine/-interlace ¤«¤éÁªÂò )
+######## Interlace settings	( -noskipline/-skipkine/-interlace )
 -noskipline
 
-
+######## Monitor settings (-15k/-24k to select KHz model)
+#-15k
+-24k
 
 #########################################################
-#	¥µ¥¦¥ó¥É¤ÎÀßÄê (¥µ¥¦¥ó¥É»ÈÍÑ²ÄÇ½»þ¤Î¤ßÍ­¸ú)	#
+#	Sound Settings (Only when sound is enabled)	#
 #########################################################
 
-######## ¥µ¥¦¥ó¥É½ÐÎÏ¤ÎÍ­Ìµ	( -sound/-nosound ¤«¤éÁªÂò¡£Ì¤»ØÄê»þ¤Ï -sound )
-#-sound
+######## Sound output enable	( -sound/-nosound. Default is  -sound )
+-sound
 
-######## fmgen ¤Î»ÈÍÑÍ­Ìµ	( -fmgen/-nofmgen ¤«¤éÁªÂò¡£Ì¤»ØÄê»þ¤Ï-nofmgen)
-#-fmgen
+######## fmgen enable	( -fmgen/-nofmgen. Default is -nofmgen)
+-nofmgen
 
-######## ²»ÎÌ[db]		( -32¡Á0 ¤ÎÃÍ¤ò»ØÄê )
+######## Output[db]		( -32ï½ž0 )
 #-volume	-3
 
-######## ¥µ¥¦¥ó¥É²»ÎÌ¥ì¥Ù¥ë[%]  ( 0¡Á100 ¤ÎÃÍ¤ò»ØÄê )
+######## Sound output level[%]  ( 0ï½ž100 )
 #-fmvol		100
-#-psgvol	20
-#-beepvol	60
+-psgvol	50
+-beepvol	60
 #-rhythvol	100
 #-adpcmvol	70
 
 
 
 #################################
-#	¤½¤ÎÂ¾¤ÎÀßÄê		#
+#	Other settings		#
 #################################
 
-######## ¥­¡¼ÀßÄê¥Õ¥¡¥¤¥ë¤ÎÆÉ¤ß¹þ¤ß
+######## Load key settings from file
 #-keyboard 0
 
-######## ¥­¡¼¥Ð¥¤¥ó¥Ç¥£¥ó¥°¤ÎÊÑ¹¹
+######## Change key binding
 #-tenkey
-#-cursor
+-cursor
 #-kanjikey
 
-######## ºî¼Ô¤Ï¡¢¥Õ¥¡¥ó¥¯¥·¥ç¥ó¥­¡¼¤Ë¤³¤ó¤Êµ¡Ç½¤ò³ä¤êÅö¤Æ¤Æ¤¤¤Þ¤¹
+######## The author has made these function key assignments:
 #-f6	IMAGE-NEXT1
 #-f7	IMAGE-NEXT2
 #-f8	NOWAIT
@@ -112,27 +137,34 @@
 
 
 #################################
-#	¤Ê¤É¤Ê¤É		#
+#	Other/misc		#
 #################################
 
-######## ROMÍÑ¥Ç¥£¥ì¥¯¥È¥ê¤Î¥Ñ¥¹
-#-romdir	"/path/of/rom/image"
+######## ROM Directory Path
+-romdir	"/home/pi/Downloads/quasi88-0.6.4/rom/"
 
-######## DISKÍÑ¥Ç¥£¥ì¥¯¥È¥ê¤Î¥Ñ¥¹
-#-diskdir	"/path/of/disk/image"
+######## DISK Directory Path
+-diskdir	"/home/pi/Projects/pc88-c"
 
-######## TAPEÍÑ¥Ç¥£¥ì¥¯¥È¥ê¤Î¥Ñ¥¹
+######## TAPE Directory Path
 #-tapedir	"/path/of/tape/image"
 
-######## P88SR.EXE¤ÎROM¥¤¥á¡¼¥¸¤ò»ÈÍÑ	( Ì¤»ØÄê»þ¤Ï¡¢»ÈÍÑ¤·¤Ê¤¤ )
+######## P88SR.EXE Rom EXE Path	( Unset means unused )
 #-compatrom	/file/name/of/rom/image
 
-######## ¾éÄ¹¥â¡¼¥É¤ÎÀßÄê		( Ì¤»ØÄê»þ¤Ï¡¢0 )
-#-verbose	0
+######## Verbose mode	( Default is 0 )
+-verbose 1
 
-######## ¥Þ¥¦¥¹¤ò¥°¥é¥Ö¤¹¤ë(¥¦¥¤¥ó¥É¥¦¤ËÊÄ¤¸¹þ¤á¤ë)
+######## Grab mouse (Lock to window)
 #-grab_mouse
 
-######## ¥Þ¥¦¥¹¤òÉ½¼¨¤·¤Ê¤¤
+######## Don't show mouse
 #-hide_mouse
 
+
+#################################
+#    Debugger                   #
+#################################
+
+####### Enable Monitor ( Default is off )
+-debug
