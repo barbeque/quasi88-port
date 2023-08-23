@@ -54,7 +54,6 @@ DISKDIR	= ~/.quasi88/disk/
 
 TAPEDIR	= ~/.quasi88/tape/
 
-
 # (X11)
 # リトルエンディアンの場合の指定
 #	ビッグエンディアンマシンの場合は、コメントアウトしましょう。
@@ -520,7 +519,7 @@ CFLAGS += -DQUASI88_SDL
 else
 ifdef 	SDL2_VERSION
 
-CFLAGS += -Isrc/FUNIX `sdl2-config --cflags`
+CFLAGS += -Isrc/FUNIX `sdl2-config --cflags` -DLSB_FIRST=1
 LIBS   += `sdl2-config --libs`  -F/Library/Frameworks
 
 CFLAGS += -DQUASI88_SDL
