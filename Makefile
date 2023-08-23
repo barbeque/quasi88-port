@@ -520,8 +520,8 @@ CFLAGS += -DQUASI88_SDL
 else
 ifdef 	SDL2_VERSION
 
-CFLAGS += -Isrc/FUNIX -Isrc/SDL2 -I/Library/Frameworks/SDL2.framework/Headers
-LIBS   +=                       -F/Library/Frameworks -framework SDL2
+CFLAGS += -Isrc/FUNIX `sdl2-config --cflags`
+LIBS   += `sdl2-config --libs`  -F/Library/Frameworks
 
 CFLAGS += -DQUASI88_SDL
 

@@ -5,6 +5,7 @@
 /************************************************************************/
 
 #include <string.h>
+#include <stdlib.h>
 
 #include "quasi88.h"
 #include "initval.h"
