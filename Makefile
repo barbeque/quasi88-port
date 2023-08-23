@@ -519,7 +519,7 @@ CFLAGS += -DQUASI88_SDL
 else
 ifdef 	SDL2_VERSION
 
-CFLAGS += -Isrc/FUNIX `sdl2-config --cflags` -DLSB_FIRST=1
+CFLAGS += -Isrc/FUNIX `sdl2-config --cflags` -DLSB_FIRST=1 -DSUPPORT_32BPP
 LIBS   += `sdl2-config --libs`  -F/Library/Frameworks
 
 CFLAGS += -DQUASI88_SDL

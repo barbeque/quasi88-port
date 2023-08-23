@@ -1151,7 +1151,7 @@ static	void	set_vram2screen_list(void)
 /*	status_buf_init_p  = status_buf_init__8;*/
 	status_buf_clear_p = status_buf_clear__8;
 #else
-	fprintf(stderr, "Error! This version is not support %dbpp !\n", DEPTH);
+	fprintf(stderr, "Error! This version is not compiled to support %dbpp !\n", DEPTH);
 	exit(1);
 #endif
 
@@ -1194,7 +1194,7 @@ static	void	set_vram2screen_list(void)
 /*	status_buf_init_p  = status_buf_init_16;*/
 	status_buf_clear_p = status_buf_clear_16;
 #else
-	fprintf(stderr, "Error! This version is not support %dbpp !\n", DEPTH);
+	fprintf(stderr, "Error! This version is not compiled to support %dbpp !\n", DEPTH);
 	exit(1);
 #endif
 
@@ -1237,7 +1237,7 @@ static	void	set_vram2screen_list(void)
 /*	status_buf_init_p  = status_buf_init_32;*/
 	status_buf_clear_p = status_buf_clear_32;
 #else
-	fprintf(stderr, "Error! This version is not support %dbpp !\n", DEPTH);
+	fprintf(stderr, "Error! This version is not compiled to support %dbpp !\n", DEPTH);
 	exit(1);
 #endif
 
