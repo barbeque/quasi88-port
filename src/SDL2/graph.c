@@ -422,6 +422,11 @@ printf("@ dont_frameskip  %d\n",    graph_info.dont_frameskip);
                   sdl_width, sdl_height, 0);
 
     sdl_renderer = SDL_CreateRenderer(sdl_window, -1, 0);
+    
+    if(!sdl_renderer) {
+        fprintf(stderr, "SDL renderer couldn't be created: %s\n", SDL_GetError());
+        exit(1);
+    }
 
     sdl_offscreen = SDL_CreateRGBSurface(0, sdl_width, sdl_height, 32,
                       0x00ff0000,
@@ -429,11 +434,21 @@ printf("@ dont_frameskip  %d\n",    graph_info.dont_frameskip);
                       0x000000ff,
                       0xff000000);
 
+    if(!sdl_offscreen) {
+        fprintf(stderr, "Offscreen texture couldn't be created: %s\n", SDL_GetError());
+        exit(1);
+    }
+
     sdl_texture = SDL_CreateTexture(
                       sdl_renderer,
                       SDL_PIXELFORMAT_ARGB8888,
                       SDL_TEXTUREACCESS_STREAMING,
                       sdl_width, sdl_height);
+
+    if(!sdl_texture) {
+        fprintf(stderr, "Main texture couldn't be created: %s\n", SDL_GetError());
+        exit(1);
+    }
 
     // HACKS
     sdl_byte_per_pixel = 4;
